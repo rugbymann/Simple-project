@@ -47,6 +47,12 @@ public class Main {
                     System.out.println(lastName);
                     break;
 
+                case 4:
+                    System.out.println("Средний возраст всех пользователей составляет: ");
+                    double averageAge = usersService.getAverageAge();
+                    System.out.println(averageAge);
+                    break;
+
                 case 5:
                     System.out.println("Выводим возраст самого высокого человека");
                     int age = usersService.getAgeOfMostHeight();
