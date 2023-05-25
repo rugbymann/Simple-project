@@ -39,4 +39,14 @@ public class UsersServiceImpl implements UsersService {
 
         return userAge.get(maxAge);
     }
+
+    public Integer getAgeOfMostHeight(){
+        List<User> users = usersRepository.findAll();
+        Map<Double,Integer> userHeight = new HashMap<>();
+        for (User user:users){
+            userHeight.put(user.getHeight(), user.getAge());
+        }
+        double maxHeight = Collections.max(userHeight.keySet());
+        return userHeight.get(maxHeight);
+    }
 }
