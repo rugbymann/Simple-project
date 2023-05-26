@@ -20,7 +20,6 @@ public class Main {
         while (true) {
             System.out.println("1. Вывести имена всех пользователей");
             System.out.println("2. Вывести фамилию самого взрослого пользователя");
-
             System.out.println("3. Сохранить нового пользователя");
             System.out.println("4. Вывести средний возраст всех пользователей");
             System.out.println("5. Вывести возраст самого высокого человека");
