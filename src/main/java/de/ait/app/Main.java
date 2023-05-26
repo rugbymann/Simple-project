@@ -57,6 +57,11 @@ public class Main {
                     int age = usersService.getAgeOfMostHeight();
                     System.out.println(age);
                     break;
+                case 6:
+                    System.out.println("Выводим имя и фамилию самого низкого человека");
+                    String name = usersService.getFirstNameAndLastNameOfLowestHeight();
+                    System.out.println(name);
+                    break;
                 case 0:
                     System.out.println("Выход");
                     System.exit(0);

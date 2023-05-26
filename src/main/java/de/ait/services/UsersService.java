@@ -10,4 +10,5 @@ public interface UsersService {
     Double getAverageAge();
 
     Integer getAgeOfMostHeight();
+    String getFirstNameAndLastNameOfLowestHeight();
 }

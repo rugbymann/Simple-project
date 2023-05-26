@@ -39,6 +39,7 @@ public class UsersServiceImpl implements UsersService {
 
         return userAge.get(maxAge);
     }
+
     @Override
     public Double getAverageAge() {
         List<User> users = usersRepository.findAll();
@@ -49,14 +50,25 @@ public class UsersServiceImpl implements UsersService {
         return (double) totalAge / users.size();
     }
 
-    public Integer getAgeOfMostHeight(){
+    public Integer getAgeOfMostHeight() {
 
         List<User> users = usersRepository.findAll();
-        Map<Double,Integer> userHeight = new HashMap<>();
-        for (User user:users){
+        Map<Double, Integer> userHeight = new HashMap<>();
+        for (User user : users) {
             userHeight.put(user.getHeight(), user.getAge());
         }
         double maxHeight = Collections.max(userHeight.keySet());
         return userHeight.get(maxHeight);
+    }
+
+    public String getFirstNameAndLastNameOfLowestHeight() {
+        List<User> users = usersRepository.findAll();
+        Map<Double, String> userHeight = new HashMap<>();
+        for (User user : users) { // пробегаем по всему списку
+            userHeight.put(user.getHeight(), user.getFirstName() + " " + user.getLastName()); // добавили пару возраст-фамилия
+        }
+        double minHeight = Collections.min(userHeight.keySet());
+
+        return userHeight.get(minHeight);
     }
 }
