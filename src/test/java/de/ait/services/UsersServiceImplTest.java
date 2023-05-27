@@ -62,7 +62,7 @@ class UsersServiceImplTest {
     }
     @Test
     void getAverageAge_Test_Invalid(){
-        //Double actual = usersService.getAveregeAge();
+        //Double actual = usersService.getAverageAge();
         //Double expected = 25.0;
         assertNotEquals(156.0, usersService.getAverageAge());
     }
