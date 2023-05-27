@@ -2,9 +2,7 @@ package de.ait.repositories;
 
 import de.ait.models.User;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,13 +14,20 @@ public class UsersRepositoryTextFileImpl implements UsersRepository {
         this.fileName = fileName;
     }
 
+    @Override
+    public void save(User user) throws IOException {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true))) {
+            writer.write(user.toString());
+            writer.newLine();
+        }
+    }
 
 
     @Override
     public List<User> findAll() {
         List<User> users = new ArrayList<>();
 
-        try (FileReader fileReader = new FileReader(fileName); 
+        try (FileReader fileReader = new FileReader(fileName);
              BufferedReader bufferedReader = new BufferedReader(fileReader)) {
 
             String line = bufferedReader.readLine();
@@ -38,6 +43,7 @@ public class UsersRepositoryTextFileImpl implements UsersRepository {
 
         return users;
     }
+
 
     private static User parseLine(String line) {
         String[] parsed = line.split("\\|");
