@@ -7,11 +7,12 @@ import de.ait.services.UsersService;
 import de.ait.services.UsersServiceImpl;
 import org.w3c.dom.ls.LSOutput;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
         UsersRepository usersRepository = new UsersRepositoryTextFileImpl("users.txt");
         UsersRepository testUserRepository = new UsersRepositoryListImpl();
@@ -44,6 +45,9 @@ public class Main {
                     System.out.println("Выводим самого взрослого пользователя");
                     String lastName = usersService.getLastNameOfMostAging();
                     System.out.println(lastName);
+                    break;
+                case 3:
+                    usersService.saveNewUser();
                     break;
 
                 case 4:
