@@ -43,36 +43,51 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     public void saveNewUser() throws IOException {
+        List<User> users = usersRepository.findAll();
         Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Введите имя нового пользователя: ");
+        System.out.print("Введите имя пользователя: ");
         String firstName = scanner.nextLine();
-        if (containsNumbers(firstName)) {
-            System.out.println("Некорректный ввод. Имя может состоять только из букв.");
-            return;
 
+        try {
+            for (User user : users) {
+                user.setFirstName(firstName);
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println("Ошибка при установке имени: " + e.getMessage());
+            return;
         }
 
-        System.out.print("Введите фамилию нового пользователя: ");
+        System.out.print("Введите фамилию пользователя: ");
         String lastName = scanner.nextLine();
-        if (containsNumbers(lastName)) {
-            System.out.println("Некорректный ввод. Фамилия может состоять только из букв.");
+        try {
+            for (User user : users) {
+                user.setLastName(lastName);
+            }
+
+        } catch (IllegalArgumentException e) {
+            System.out.println("Ошибка при установке фамилии: " + e.getMessage());
             return;
         }
 
-
-        System.out.print("Введите возраст нового пользователя: ");
+        System.out.print("Введите возраст пользователя: ");
         int age = scanner.nextInt();
-        if (age <= 0) {
-            System.out.println("Некорректный ввод");
+        try {
+            for (User user : users) {
+                user.setAge(age);
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println("Ошибка при установке возраста: " + e.getMessage());
             return;
         }
 
-
-        System.out.print("Введите рост нового пользователя: ");
+        System.out.print("Введите рост пользователя: ");
         double height = scanner.nextDouble();
-        if (height <= 0) {
-            System.out.println("Некорректный ввод");
+        try {
+            for (User user : users) {
+                user.setHeight(height);
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println("Ошибка при установке роста: " + e.getMessage());
             return;
         }
 
@@ -80,13 +95,14 @@ public class UsersServiceImpl implements UsersService {
         usersRepository.save(newUser);
 
         System.out.println("Новый пользователь сохранен.");
+
     }
 
 
     @Override
     public Double getAverageAge() {
         List<User> users = usersRepository.findAll();
-        if (users.isEmpty()){
+        if (users.isEmpty()) {
             return 0.0;
         }
         int totalAge = 0;

@@ -55,7 +55,7 @@ public class User {
     }
 
     public void setHeight(double height) {
-        if (height >0 && height <=5) {
+        if (height >0 && height <=500) {
             this.height = height;
         } else {
             throw new IllegalArgumentException("Некорректный рост.");
