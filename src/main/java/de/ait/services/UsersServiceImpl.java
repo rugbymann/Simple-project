@@ -18,26 +18,21 @@ public class UsersServiceImpl implements UsersService {
     public List<String> getNames() {
         List<User> users = usersRepository.findAll();
         List<String> names = new ArrayList<>();
-
         for (User user : users) {
             names.add(user.getFirstName());
         }
-
         return names;
     }
 
     @Override
     public String getLastNameOfMostAging() {
-
         List<User> users = usersRepository.findAll();
         Map<Integer, String> userAge = new HashMap<>();
 
         for (User user : users) {
             userAge.put(user.getAge(), user.getLastName());
         }
-
         int maxAge = Collections.max(userAge.keySet());
-
         return userAge.get(maxAge);
     }
 
@@ -47,7 +42,6 @@ public class UsersServiceImpl implements UsersService {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Введите имя пользователя: ");
         String firstName = scanner.nextLine();
-
         try {
             for (User user : users) {
                 user.setFirstName(firstName);
@@ -56,19 +50,16 @@ public class UsersServiceImpl implements UsersService {
             System.out.println("Ошибка при установке имени: " + e.getMessage());
             return;
         }
-
         System.out.print("Введите фамилию пользователя: ");
         String lastName = scanner.nextLine();
         try {
             for (User user : users) {
                 user.setLastName(lastName);
             }
-
         } catch (IllegalArgumentException e) {
             System.out.println("Ошибка при установке фамилии: " + e.getMessage());
             return;
         }
-
         System.out.print("Введите возраст пользователя: ");
         int age = scanner.nextInt();
         try {
@@ -79,7 +70,6 @@ public class UsersServiceImpl implements UsersService {
             System.out.println("Ошибка при установке возраста: " + e.getMessage());
             return;
         }
-
         System.out.print("Введите рост пользователя: ");
         double height = scanner.nextDouble();
         try {
@@ -90,14 +80,11 @@ public class UsersServiceImpl implements UsersService {
             System.out.println("Ошибка при установке роста: " + e.getMessage());
             return;
         }
-
         User newUser = new User(firstName, lastName, age, height);
         usersRepository.save(newUser);
-
         System.out.println("Новый пользователь сохранен.");
 
     }
-
 
     @Override
     public Double getAverageAge() {
@@ -113,7 +100,6 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-
     public Integer getAgeOfMostHeight() {
 
         List<User> users = usersRepository.findAll();
@@ -133,7 +119,6 @@ public class UsersServiceImpl implements UsersService {
             userHeight.put(user.getHeight(), user.getFirstName() + " " + user.getLastName());
         }
         double minHeight = Collections.min(userHeight.keySet());
-
         return userHeight.get(minHeight);
     }
 
@@ -145,5 +130,4 @@ public class UsersServiceImpl implements UsersService {
         }
         return false;
     }
-
 }

@@ -40,7 +40,6 @@ public class Main {
                         System.out.println(name);
                     }
                     break;
-
                 case 2:
                     System.out.println("Выводим самого взрослого пользователя");
                     String lastName = usersService.getLastNameOfMostAging();
@@ -49,13 +48,11 @@ public class Main {
                 case 3:
                     usersService.saveNewUser();
                     break;
-
                 case 4:
                     System.out.println(
                             String.format(
                                     "Средний возраст всех пользователей составляет %.1f лет", usersService.getAverageAge()));
                     break;
-
                 case 5:
                     System.out.println("Выводим возраст самого высокого человека");
                     int age = usersService.getAgeOfMostHeight();
