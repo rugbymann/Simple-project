@@ -3,6 +3,7 @@ package de.ait.services;
 import de.ait.models.User;
 import de.ait.repositories.UsersRepository;
 
+import java.io.IOException;
 import java.util.*;
 
 public class UsersServiceImpl implements UsersService {
@@ -41,6 +42,48 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
+    public void saveNewUser() throws IOException {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Введите имя нового пользователя: ");
+        String firstName = scanner.nextLine();
+        if (containsNumbers(firstName)) {
+            System.out.println("Некорректный ввод. Имя может состоять только из букв.");
+            return;
+
+        }
+
+        System.out.print("Введите фамилию нового пользователя: ");
+        String lastName = scanner.nextLine();
+        if (containsNumbers(lastName)) {
+            System.out.println("Некорректная фамилия. Фамилия может состоять только из букв.");
+            return;
+        }
+
+
+        System.out.print("Введите возраст нового пользователя: ");
+        int age = scanner.nextInt();
+        if (age <= 0) {
+            System.out.println("Некорректный ввод");
+            return;
+        }
+
+
+        System.out.print("Введите рост нового пользователя: ");
+        double height = scanner.nextDouble();
+        if (height <= 0) {
+            System.out.println("Некорректный ввод");
+            return;
+        }
+
+        User newUser = new User(firstName, lastName, age, height);
+        usersRepository.save(newUser);
+
+        System.out.println("Новый пользователь сохранен.");
+    }
+
+
+    @Override
     public Double getAverageAge() {
         List<User> users = usersRepository.findAll();
         int totalAge = 0;
@@ -49,6 +92,8 @@ public class UsersServiceImpl implements UsersService {
         }
         return (double) totalAge / users.size();
     }
+
+    @Override
 
     public Integer getAgeOfMostHeight() {
 
@@ -61,6 +106,7 @@ public class UsersServiceImpl implements UsersService {
         return userHeight.get(maxHeight);
     }
 
+    @Override
     public String getFirstNameAndLastNameOfLowestHeight() {
         List<User> users = usersRepository.findAll();
         Map<Double, String> userHeight = new HashMap<>();
@@ -71,4 +117,14 @@ public class UsersServiceImpl implements UsersService {
 
         return userHeight.get(minHeight);
     }
+
+    public static boolean containsNumbers(String str) {
+        for (char c : str.toCharArray()) {
+            if (Character.isDigit(c)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
