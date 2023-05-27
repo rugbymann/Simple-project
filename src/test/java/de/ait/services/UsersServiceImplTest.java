@@ -41,7 +41,6 @@ class UsersServiceImplTest {
 
         Integer expected=25;
         Integer actual=usersService.getAgeOfMostHeight();
-        // assertFalse(expected==actual);
         assertNotEquals(expected,actual);
     }
 
@@ -56,14 +55,10 @@ class UsersServiceImplTest {
 
     @Test
     void getAverageAge_Test_Valid(){
-        //Double actual = usersService.getAveregeAge();
-        //Double expected = 25.0;
         assertEquals(25.0, usersService.getAverageAge());
     }
     @Test
     void getAverageAge_Test_Invalid(){
-        //Double actual = usersService.getAverageAge();
-        //Double expected = 25.0;
         assertNotEquals(156.0, usersService.getAverageAge());
     }
     @Test
