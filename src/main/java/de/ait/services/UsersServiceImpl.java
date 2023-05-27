@@ -56,7 +56,7 @@ public class UsersServiceImpl implements UsersService {
         System.out.print("Введите фамилию нового пользователя: ");
         String lastName = scanner.nextLine();
         if (containsNumbers(lastName)) {
-            System.out.println("Некорректная фамилия. Фамилия может состоять только из букв.");
+            System.out.println("Некорректный ввод. Фамилия может состоять только из букв.");
             return;
         }
 
@@ -86,6 +86,9 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public Double getAverageAge() {
         List<User> users = usersRepository.findAll();
+        if (users.isEmpty()){
+            return 0.0;
+        }
         int totalAge = 0;
         for (User user : users) {
             totalAge += user.getAge();
@@ -110,8 +113,8 @@ public class UsersServiceImpl implements UsersService {
     public String getFirstNameAndLastNameOfLowestHeight() {
         List<User> users = usersRepository.findAll();
         Map<Double, String> userHeight = new HashMap<>();
-        for (User user : users) { // пробегаем по всему списку
-            userHeight.put(user.getHeight(), user.getFirstName() + " " + user.getLastName()); // добавили пару возраст-фамилия
+        for (User user : users) {
+            userHeight.put(user.getHeight(), user.getFirstName() + " " + user.getLastName());
         }
         double minHeight = Collections.min(userHeight.keySet());
 
