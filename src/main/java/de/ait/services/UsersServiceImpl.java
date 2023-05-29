@@ -47,7 +47,7 @@ public class UsersServiceImpl implements UsersService {
                 user.setFirstName(firstName);
             }
         } catch (IllegalArgumentException e) {
-            System.out.println("Ошибка при установке имени: " + e.getMessage());
+            System.out.println("Ошибка при вводе имени: " + e.getMessage());
             return;
         }
         System.out.print("Введите фамилию пользователя: ");
@@ -57,7 +57,7 @@ public class UsersServiceImpl implements UsersService {
                 user.setLastName(lastName);
             }
         } catch (IllegalArgumentException e) {
-            System.out.println("Ошибка при установке фамилии: " + e.getMessage());
+            System.out.println("Ошибка при вводе фамилии: " + e.getMessage());
             return;
         }
         System.out.print("Введите возраст пользователя: ");
@@ -67,7 +67,7 @@ public class UsersServiceImpl implements UsersService {
                 user.setAge(age);
             }
         } catch (IllegalArgumentException e) {
-            System.out.println("Ошибка при установке возраста: " + e.getMessage());
+            System.out.println("Ошибка при вводе возраста: " + e.getMessage());
             return;
         }
         System.out.print("Введите рост пользователя: ");
@@ -77,7 +77,7 @@ public class UsersServiceImpl implements UsersService {
                 user.setHeight(height);
             }
         } catch (IllegalArgumentException e) {
-            System.out.println("Ошибка при установке роста: " + e.getMessage());
+            System.out.println("Ошибка при вводе роста: " + e.getMessage());
             return;
         }
         User newUser = new User(firstName, lastName, age, height);
